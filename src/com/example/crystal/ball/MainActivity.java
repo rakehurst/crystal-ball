@@ -2,6 +2,8 @@ package com.example.crystal.ball;
 
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -38,6 +40,7 @@ public class MainActivity extends Activity {
     			
     			animateCrystalBall();
     			animateAnswer();
+    			playSound();
     		}
 		});
     }
@@ -57,6 +60,19 @@ public class MainActivity extends Activity {
     	fadeInAnimation.setFillAfter(true);
     	
     	mAnswerLabel.setAnimation(fadeInAnimation);
+    }
+    
+    private void playSound() {
+    	MediaPlayer player = MediaPlayer.create(this, R.raw.crystal_ball);
+    	player.start();
+    	player.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+				
+			}
+		});
     }
 
     @Override
